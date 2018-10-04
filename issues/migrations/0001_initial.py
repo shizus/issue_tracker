@@ -21,8 +21,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('description', models.CharField(max_length=200)),
-                ('status', django_enumfield.db.fields.EnumField(default=0, enum=issues.models.IssueState)),
-                ('category', django_enumfield.db.fields.EnumField(default=0, enum=issues.models.IssueState)),
+                ('status', django_enumfield.db.fields.EnumField(default=0, enum=issues.models.IssueStatus)),
+                ('category', django_enumfield.db.fields.EnumField(default=0, enum=issues.models.IssueStatus)),
                 ('solver', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='solver', to=settings.AUTH_USER_MODEL)),
                 ('submitter', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='submitter', to=settings.AUTH_USER_MODEL)),
             ],
