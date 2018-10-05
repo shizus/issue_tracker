@@ -1,0 +1,1 @@
+[{"model": "auth.group", "pk": 1, "fields": {"name": "superuser", "permissions": [1, 2, 3, 4, 13, 14, 15, 16, 5, 6, 7, 8, 9, 10, 11, 12, 17, 18, 19, 20, 25, 26, 27, 28, 21, 22, 23, 24]}}, {"model": "auth.group", "pk": 2, "fields": {"name": "staff", "permissions": [28]}}]

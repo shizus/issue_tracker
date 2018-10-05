@@ -1,13 +1,26 @@
 from django.contrib import admin
 
 # Register your models here.
-from django.db.models import Avg, F, Max, Min
 
 from .models import Issue, IssueStatus
 
 
 @admin.register(Issue)
 class IssueAdmin(admin.ModelAdmin):
+
+    list_display = ('submitter', 'solver', 'created', 'finished', 'status', 'category')
+    list_filter = ('submitter', 'solver', 'created', 'finished', 'status', 'category')
+    search_fields = [
+        'submitter__first_name',
+        'submitter__last_name',
+        'submitter__username',
+        'submitter__email',
+        'solver__first_name',
+        'solver__last_name',
+        'solver__username',
+        'solver__email',
+        'description',
+                     ]
 
     def changelist_view(self, request, extra_context=None):
         extra_context = extra_context or {}
