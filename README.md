@@ -56,5 +56,9 @@ If you need to test how this works you can run
 
 `python manage.py loaddata fixtures/users.json`
 
-
+You will have then a user called staff_user and a user
+called app_superuser you can reset their password with your
+own super user created in the previous section and see how
+the app behaves for them. Remember that none of them have
+Django's superuser status.
 
