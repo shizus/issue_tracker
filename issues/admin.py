@@ -26,8 +26,6 @@ class IssueAdmin(admin.ModelAdmin):
         extra_context = extra_context or {}
         issues = Issue.objects.all()
 
-        max(issues, key=lambda item: item.duration)
-
         durations = [issue.duration.seconds for issue in issues]
         solved_issues = Issue.objects.filter(status=IssueStatus.SOLVED)
 

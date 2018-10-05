@@ -33,7 +33,7 @@ Create a super user
 
 Populate database with initial data
 
-`manage.py loaddata fixtures/groups.json`
+`python manage.py loaddata fixtures/groups.json`
 
 Run the app
 
