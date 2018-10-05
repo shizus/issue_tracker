@@ -38,3 +38,23 @@ Populate database with initial data
 Run the app
 
 `python manage.py runserver`
+
+## About the functionality
+
+With the last section you have everything working with a group
+called superuser that can do everything and a group called
+staff that can view issues only.
+
+**This must not be confused** with the staff and superuser attributes
+for Django. In this app all users that need to see the
+issues must be have the staff user attribute enabled.
+
+A Django super user can do anything without needing a group
+or any permission.
+
+If you need to test how this works you can run
+
+`python manage.py loaddata fixtures/users.json`
+
+
+
