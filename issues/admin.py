@@ -1,6 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
+from django.db.models import Avg, Min, Max
 
 from .models import Issue, IssueStatus
 
@@ -24,17 +25,12 @@ class IssueAdmin(admin.ModelAdmin):
 
     def changelist_view(self, request, extra_context=None):
         extra_context = extra_context or {}
-        issues = Issue.objects.all()
-
-        durations = [issue.duration.total_seconds() for issue in issues]
-        solved_issues = Issue.objects.filter(status=IssueStatus.SOLVED)
-
-        durations_solved = [issue.duration.total_seconds() for issue in solved_issues]
+        issues = Issue.objects.all().aggregate(Avg('duration'), Min('duration'), Max('duration'))
 
         extra_context['duration'] = {
-            'min': 'No data available' if len(durations_solved) == 0 else min(durations_solved),
-            'avg': 'No data available' if len(durations) == 0 else sum(durations) / float(len(durations)),
-            'max': 'No data available' if len(durations) == 0 else max(durations)
+            'min': 'No data available' if not issues['duration__min'] else issues['duration__min'],
+            'avg': 'No data available' if not issues['duration__avg'] else issues['duration__avg'],
+            'max': 'No data available' if not issues['duration__max'] else issues['duration__max']
         }
 
         return super().changelist_view(

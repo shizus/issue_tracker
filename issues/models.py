@@ -28,24 +28,19 @@ class Issue(models.Model):
     category = enum.EnumField(IssueCategory, default=IssueCategory.BUG)
     created = models.DateTimeField(auto_now_add=True, blank=True)
     finished = models.DateTimeField(null=True, editable=False)
+    duration = models.DurationField(null=True, editable=False)
 
     def __str__(self):
         return '{}'.format(self.description[0:10])
 
-    @property
-    def duration(self):
-        if self.created is not None and self.finished is not None:
-            return self.finished - self.created
-        else:
-            return datetime.now(timezone.utc) - self.created
-
     @staticmethod
-    def post_save(sender, **kwargs):
+    def pre_save(sender, **kwargs):
         instance = kwargs.get('instance')
         # created = kwargs.get('created')
         if instance.status == IssueStatus.SOLVED:
             instance.finished = datetime.now()
+            instance.duration = datetime.now(timezone.utc) - instance.created
         else:
             instance.finished = None
 
-pre_save.connect(Issue.post_save, sender=Issue)
+pre_save.connect(Issue.pre_save, sender=Issue)
