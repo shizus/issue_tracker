@@ -26,7 +26,7 @@ class Issue(models.Model):
     description = models.CharField(max_length=200)
     status = enum.EnumField(IssueStatus, default=IssueStatus.OPENED)
     category = enum.EnumField(IssueCategory, default=IssueCategory.BUG)
-    created = models.DateTimeField(auto_now=True, blank=True)
+    created = models.DateTimeField(auto_now_add=True, blank=True)
     finished = models.DateTimeField(null=True, editable=False)
 
     def __str__(self):

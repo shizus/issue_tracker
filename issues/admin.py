@@ -26,10 +26,10 @@ class IssueAdmin(admin.ModelAdmin):
         extra_context = extra_context or {}
         issues = Issue.objects.all()
 
-        durations = [issue.duration.seconds for issue in issues]
+        durations = [issue.duration.total_seconds() for issue in issues]
         solved_issues = Issue.objects.filter(status=IssueStatus.SOLVED)
 
-        durations_solved = [issue.duration.seconds for issue in solved_issues]
+        durations_solved = [issue.duration.total_seconds() for issue in solved_issues]
 
         extra_context['duration'] = {
             'min': 'No data available' if len(durations_solved) == 0 else min(durations_solved),
